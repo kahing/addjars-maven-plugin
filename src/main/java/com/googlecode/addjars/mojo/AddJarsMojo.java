@@ -85,7 +85,7 @@ public class AddJarsMojo extends AbstractMojo {
 	}
 	
 	private void executeInt() throws Exception {
-		File workdir = new File(project.getBuild().getOutputDirectory(), getClass().getName());
+		File workdir = new File(project.getBuild().getDirectory(), getClass().getName());
 		workdir.mkdirs();
 		
 		for(JarResource resource: resources) {
