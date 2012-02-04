@@ -48,6 +48,7 @@
 	<scm>
 		<url>http://code.google.com/p/addjars-maven-plugin/source/browse/</url>
 		<connection>scm:hg:https://code.google.com/p/addjars-maven-plugin/</connection>
+		<developerConnection>scm:hg:https://code.google.com/p/addjars-maven-plugin/</developerConnection>
 	</scm>
 
 	<developers>
