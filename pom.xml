@@ -26,7 +26,7 @@
 	
     <groupId>com.googlecode.addjars-maven-plugin</groupId>
     <artifactId>addjars-maven-plugin</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
 	
     <name>AddJars Maven Plugin</name>
