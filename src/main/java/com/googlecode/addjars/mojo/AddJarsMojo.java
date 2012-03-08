@@ -97,6 +97,7 @@ public class AddJarsMojo extends AbstractMojo {
 					a.addMetadata(new ProjectArtifactMetadata(a, createArtifactPom(a)));
 					artifactInstaller.install(jar, a, null);
 					stamp.createNewFile();
+                    stamp.setLastModified(jar.lastModified());
 				}
 				
 				project.getDependencyArtifacts().add(a);
