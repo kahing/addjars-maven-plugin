@@ -105,7 +105,7 @@ public class AddJarsMojo extends AbstractMojo {
 			}
 		}
 		
-		File pomFile = new File(workdir, "pom-modified.xml");
+		File pomFile = new File(workdir, "pom.xml");
 		writePom(pomFile, project.getOriginalModel());
 		project.setFile(pomFile);
 	}
