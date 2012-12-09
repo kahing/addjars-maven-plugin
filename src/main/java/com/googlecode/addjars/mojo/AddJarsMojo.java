@@ -21,7 +21,10 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.artifact.factory.ArtifactFactory;
 import org.apache.maven.artifact.installer.ArtifactInstaller;
@@ -88,6 +91,8 @@ public class AddJarsMojo extends AbstractMojo {
 		File workdir = new File(project.getBuild().getDirectory(), getClass().getName());
 		workdir.mkdirs();
 		
+		Set<Artifact> dependenciesArtifacts = new HashSet<Artifact>();		
+		
 		for(JarResource resource: resources) {
 			for(File jar: getJars(resource)) {
 				Artifact a = artifactFactory.createArtifact(project.getGroupId(), project.getArtifactId()+"-"+jar.getName(), project.getVersion(), resource.getScope(), "jar");
@@ -100,10 +105,17 @@ public class AddJarsMojo extends AbstractMojo {
                     stamp.setLastModified(jar.lastModified());
 				}
 				
-				project.getDependencyArtifacts().add(a);
-				project.getOriginalModel().addDependency(createDependency(a));
+				dependenciesArtifacts.add(a);
 			}
 		}
+		
+		Set newDependenciesArtifacts = new HashSet(project.getDependencyArtifacts());
+		newDependenciesArtifacts.addAll(dependenciesArtifacts);
+		
+		project.setDependencyArtifacts(newDependenciesArtifacts);
+		
+		for (Artifact dependency : dependenciesArtifacts)
+			project.getOriginalModel().addDependency(createDependency(dependency));
 		
 		File pomFile = new File(workdir, "pom.xml");
 		writePom(pomFile, project.getOriginalModel());
